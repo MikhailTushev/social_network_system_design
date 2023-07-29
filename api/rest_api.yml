@@ -47,20 +47,13 @@ paths:
             - read
             - write
 
-  /user/chats/{chatId}:
+  /user/chats/{id}:
     get:
       tags:
         - ChatContoller
       summary: Get messages by id chat/dialog of user
       parameters:
         - name: id
-          in: path
-          description: id of user profile
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: chatId
           in: path
           description: id of chat/dialog
           required: true
@@ -224,7 +217,7 @@ paths:
           description: Input parameters not found
         '503':
           description: Internal Server Error
-                  
+  
   /profile/{id}/friend:
     post:
       tags:
@@ -352,13 +345,13 @@ paths:
             - read
             - write
 
-  /chat/{chatId}/message:
+  /chat/{id}/message:
     post:
       tags:
         - Message
       summary: send message to chat/direct
       parameters:
-        - name: chatId
+        - name: id
           in: path
           description: id of chat
           required: true
@@ -437,7 +430,7 @@ paths:
           description: Input parameters not found
         '503':
           description: Internal Server Error
-  
+
 components:
   schemas:
     Chat:
