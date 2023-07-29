@@ -47,7 +47,7 @@ paths:
             - read
             - write
 
-  /user/{id}/chats/{chatId}:
+  /user/chats/{chatId}:
     get:
       tags:
         - ChatContoller
@@ -91,11 +91,11 @@ paths:
             - read
             - write
 
-  /profile/{id}/feed:
+  /profile/{id}/post:
     post:
       tags:
         - Feed
-      summary: Create feed
+      summary: Create post
       parameters:
         - name: id
           in: path
@@ -225,7 +225,7 @@ paths:
         '503':
           description: Internal Server Error
                   
-  /profile/{id}/friend/{targetId}:
+  /profile/{id}/friend:
     post:
       tags:
         - Friend
@@ -234,13 +234,6 @@ paths:
         - name: id
           in: path
           description: id of user
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: targetId
-          in: path
-          description: id of target user profile
           required: true
           schema:
             type: integer
@@ -268,13 +261,6 @@ paths:
         - name: id
           in: path
           description: id of user
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: targetId
-          in: path
-          description: id of target user profile
           required: true
           schema:
             type: integer
@@ -366,19 +352,12 @@ paths:
             - read
             - write
 
-  /user/{id}/chat/{chatId}/message:
+  /chat/{chatId}/message:
     post:
       tags:
         - Message
       summary: send message to chat/direct
       parameters:
-        - name: id
-          in: path
-          description: user id
-          required: true
-          schema:
-            type: integer
-            format: int64
         - name: chatId
           in: path
           description: id of chat
