@@ -1,0 +1,555 @@
+openapi: 3.0.1
+info:
+  title: VkApi
+  version: '1.0'
+  description: Social network api by System Design course [system_design](https://balun.courses/courses/system_design)
+paths:
+  /user/{id}/chats:
+    get:
+      tags:
+        - ChatContoller
+      summary: Get user's chats
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chat'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chat'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chat'
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+      security:
+        - vk_auth:
+            - read
+            - write
+
+  /user/{id}/chats/{chatId}:
+    get:
+      tags:
+        - ChatContoller
+      summary: Get messages by id chat/dialog of user
+      parameters:
+        - name: id
+          in: path
+          description: id of user profile
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: chatId
+          in: path
+          description: id of chat/dialog
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Dialog'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dialog'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Dialog'
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+      security:
+        - vk_auth:
+            - read
+            - write
+
+  /profile/{id}/feed:
+    post:
+      tags:
+        - Feed
+      summary: Create feed
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: content for create feed
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feed'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Feed'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Feed'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int64
+            application/json:
+              schema:
+                type: integer
+                format: int64
+            text/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+
+      security:
+        - vk_auth:
+            - read
+            - write
+
+  /profile/{id}/feeds:
+    get:
+      tags:
+        - Feed
+      summary: Get feeds by user
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FeedEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FeedEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FeedEntity'
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+
+      security:
+        - vk_auth:
+            - read
+            - write
+
+  /profile/{id}/friends:
+    get:
+      tags:
+        - Friend
+      summary: Get user's friend profile
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Profile'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Profile'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Profile'
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+                  
+  /profile/{id}/friend/{targetId}:
+    post:
+      tags:
+        - Friend
+      summary: Add user by id
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: targetId
+          in: path
+          description: id of target user profile
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+
+      security:
+        - vk_auth:
+            - read
+            - write
+
+    delete:
+      tags:
+        - Friend
+      summary: Delete user by id
+      parameters:
+        - name: id
+          in: path
+          description: id of user
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: targetId
+          in: path
+          description: id of target user profile
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+
+      security:
+        - vk_auth:
+            - read
+            - write
+
+  /media/upload:
+    post:
+      tags:
+        - Media
+      summary: Upload media file.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                MediaFile:
+                  type: string
+                  format: binary
+            encoding:
+              MediaFile:
+                style: form
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int64
+            application/json:
+              schema:
+                type: integer
+                format: int64
+            text/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+
+      security:
+        - vk_auth:
+            - read
+            - write
+  /media/load/{id}:
+    get:
+      tags:
+        - Media
+      summary: Get of media file by id.
+      parameters:
+        - name: id
+          in: path
+          description: id of media-file
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+
+      security:
+        - vk_auth:
+            - read
+            - write
+
+  /user/{id}/chat/{chatId}/message:
+    post:
+      tags:
+        - Message
+      summary: send message to chat/direct
+      parameters:
+        - name: id
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: chatId
+          in: path
+          description: id of chat
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: content of message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int64
+            application/json:
+              schema:
+                type: integer
+                format: int64
+            text/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+
+      security:
+        - vk_auth:
+            - read
+            - write
+
+  /profile/{id}:
+    get:
+      tags:
+        - Profile
+      summary: Get user profile
+      parameters:
+        - name: id
+          in: path
+          description: id of user profile
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Profile'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          description: Invalid input parametrs
+        '404':
+          description: Input parameters not found
+        '503':
+          description: Internal Server Error
+  
+components:
+  schemas:
+    Chat:
+      type: object
+      properties:
+        chatName:
+          type: integer
+          format: int64
+        chatType:
+          type: integer
+          format: int64
+        dialogId:
+          type: integer
+          format: int64
+      additionalProperties: false
+    Dialog:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          nullable: true
+      additionalProperties: false
+    Feed:
+      type: object
+      properties:
+        content:
+          type: string
+          nullable: true
+        photoId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    FeedEntity:
+      type: object
+      properties:
+        content:
+          type: string
+          nullable: true
+        photoId:
+          type: string
+          nullable: true
+        userId:
+          type: integer
+          format: int64
+      additionalProperties: false
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        text:
+          type: string
+          nullable: true
+        fromUserId:
+          type: string
+          nullable: true
+        sentAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Profile:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        photoId:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    vk_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://vk_api_auth
+    bearer:
+      type: http
+      scheme: bearer
