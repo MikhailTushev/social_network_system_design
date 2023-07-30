@@ -30,7 +30,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
       security:
         - vk_auth:
@@ -61,7 +61,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
       security:
         - vk_auth:
@@ -107,7 +107,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
 
       security:
@@ -141,7 +141,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
 
       security:
@@ -173,7 +173,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
 
   /profile/{id}/friend:
@@ -196,7 +196,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
       security:
         - vk_auth:
@@ -222,7 +222,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
 
       security:
@@ -267,7 +267,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
 
       security:
@@ -294,7 +294,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
 
       security:
@@ -341,7 +341,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
       security:
         - vk_auth:
@@ -372,7 +372,7 @@ paths:
           description: Invalid input parametrs
         '404':
           description: Input parameters not found
-        '503':
+        '500':
           description: Internal Server Error
 
 components:
