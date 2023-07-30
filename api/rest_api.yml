@@ -4,7 +4,7 @@ info:
   version: '1.0'
   description: Social network api by System Design course [system_design](https://balun.courses/courses/system_design)
 paths:
-  /user/{id}/chats:
+  /profile/{id}/chats:
     get:
       tags:
         - ChatContoller
@@ -47,7 +47,7 @@ paths:
             - read
             - write
 
-  /user/chats/{id}:
+  /profile/chats/{id}:
     get:
       tags:
         - ChatContoller
@@ -217,7 +217,7 @@ paths:
           description: Input parameters not found
         '503':
           description: Internal Server Error
-  
+
   /profile/{id}/friend:
     post:
       tags:
@@ -345,11 +345,11 @@ paths:
             - read
             - write
 
-  /chat/{id}/message:
+  profile/chat/{id}/message:
     post:
       tags:
         - Message
-      summary: send message to chat/direct
+      summary: Send message to chat/direct
       parameters:
         - name: id
           in: path
