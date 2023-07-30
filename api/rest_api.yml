@@ -26,8 +26,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Chat'
-        '400':
-          description: Invalid input parametrs
         '404':
           description: Input parameters not found
         '500':
@@ -36,7 +34,6 @@ paths:
         - vk_auth:
             - read
             - write
-
   /profile/chats/{id}:
     get:
       tags:
@@ -67,7 +64,6 @@ paths:
         - vk_auth:
             - read
             - write
-
   /profile/{id}/post:
     post:
       tags:
@@ -91,15 +87,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                type: integer
-                format: int64
             application/json:
-              schema:
-                type: integer
-                format: int64
-            text/json:
               schema:
                 type: integer
                 format: int64
@@ -109,12 +97,10 @@ paths:
           description: Input parameters not found
         '500':
           description: Internal Server Error
-
       security:
         - vk_auth:
             - read
             - write
-
   /profile/{id}/feeds:
     get:
       tags:
@@ -137,18 +123,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/FeedEntity'
-        '400':
-          description: Invalid input parametrs
         '404':
           description: Input parameters not found
         '500':
           description: Internal Server Error
-
       security:
         - vk_auth:
             - read
             - write
-
   /profile/{id}/friends:
     get:
       tags:
@@ -169,13 +151,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Profile'
-        '400':
-          description: Invalid input parametrs
         '404':
           description: Input parameters not found
         '500':
           description: Internal Server Error
-
   /profile/{id}/friend:
     post:
       tags:
@@ -192,8 +171,6 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: Invalid input parametrs
         '404':
           description: Input parameters not found
         '500':
@@ -202,7 +179,6 @@ paths:
         - vk_auth:
             - read
             - write
-
     delete:
       tags:
         - Friend
@@ -218,18 +194,14 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: Invalid input parametrs
         '404':
           description: Input parameters not found
         '500':
           description: Internal Server Error
-
       security:
         - vk_auth:
             - read
             - write
-
   /media/upload:
     post:
       tags:
@@ -251,15 +223,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                type: integer
-                format: int64
             application/json:
-              schema:
-                type: integer
-                format: int64
-            text/json:
               schema:
                 type: integer
                 format: int64
@@ -290,18 +254,14 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: Invalid input parametrs
         '404':
           description: Input parameters not found
         '500':
           description: Internal Server Error
-
       security:
         - vk_auth:
             - read
             - write
-
   /profile/chat/{id}/message:
     post:
       tags:
@@ -325,15 +285,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                type: integer
-                format: int64
             application/json:
-              schema:
-                type: integer
-                format: int64
-            text/json:
               schema:
                 type: integer
                 format: int64
@@ -347,7 +299,6 @@ paths:
         - vk_auth:
             - read
             - write
-
   /profile/{id}:
     get:
       tags:
@@ -368,13 +319,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Profile'
-        '400':
-          description: Invalid input parametrs
         '404':
           description: Input parameters not found
         '500':
           description: Internal Server Error
-
 components:
   schemas:
     Chat:
