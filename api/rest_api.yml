@@ -21,17 +21,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Chat'
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Chat'
-            text/json:
               schema:
                 type: array
                 items:
@@ -64,13 +54,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/Dialog'
             application/json:
-              schema:
-                $ref: '#/components/schemas/Dialog'
-            text/json:
               schema:
                 $ref: '#/components/schemas/Dialog'
         '400':
@@ -101,12 +85,6 @@ paths:
         description: content for create feed
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Feed'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Feed'
-          application/*+json:
             schema:
               $ref: '#/components/schemas/Feed'
       responses:
@@ -154,17 +132,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FeedEntity'
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FeedEntity'
-            text/json:
               schema:
                 type: array
                 items:
@@ -196,17 +164,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Profile'
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Profile'
-            text/json:
               schema:
                 type: array
                 items:
@@ -240,7 +198,6 @@ paths:
           description: Input parameters not found
         '503':
           description: Internal Server Error
-
       security:
         - vk_auth:
             - read
@@ -345,7 +302,7 @@ paths:
             - read
             - write
 
-  profile/chat/{id}/message:
+  /profile/chat/{id}/message:
     post:
       tags:
         - Message
@@ -362,12 +319,6 @@ paths:
         description: content of message
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Message'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/Message'
-          application/*+json:
             schema:
               $ref: '#/components/schemas/Message'
       responses:
@@ -392,7 +343,6 @@ paths:
           description: Input parameters not found
         '503':
           description: Internal Server Error
-
       security:
         - vk_auth:
             - read
@@ -415,13 +365,7 @@ paths:
         '200':
           description: Success
           content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/Profile'
             application/json:
-              schema:
-                $ref: '#/components/schemas/Profile'
-            text/json:
               schema:
                 $ref: '#/components/schemas/Profile'
         '400':
@@ -522,6 +466,9 @@ components:
       flows:
         implicit:
           authorizationUrl: https://vk_api_auth
+          scopes:
+            read:any_controller: get some controller
+            write:any_controller: write to some contoller
     bearer:
       type: http
       scheme: bearer
