@@ -1,0 +1,102 @@
+//https://dbdiagram.io/d/64c636c202bd1c4a5eecf665
+
+Table profile {
+  id biginteger [primary key]
+  first_name varchar
+  last_name varchar
+  bith_date datetame
+  photo_id biginteger
+  cityType int // internal enum with all county
+  hobby text [note: 'Content of the hobby']
+  createdAt datetame
+  updateAt datetame
+}
+
+Table feed {
+  id biginteger [primary key]
+  profile_id biginteger 
+  body text [note: 'Content of the post']
+  photo_id biginteger
+  createdAt datetame
+  updateAt datetame
+}
+
+// friends
+Table profile_relate {
+  id biginteger [primary key]
+  profile_id biginteger 
+  profile_sec_id biginteger
+  createdAt datetame
+  updateAt datetame
+}
+
+Table media_relate {
+  id biginteger [primary key]
+  profile_id biginteger 
+  photo_id biginteger
+  type_relate int // post\message\photo profile
+  createdAt datetame
+  updateAt datetame
+}
+
+Table file {
+  id biginteger [primary key]
+  body text [note: 'bytes content']
+  media_type int // doc, photo, txt... 
+  createdAt datetame
+  updateAt datetame
+}
+
+Table chat {
+  id biginteger [primary key]
+  photo_id biginteger  
+  type int
+  createdAt datetame
+  updateAt datetame
+}
+
+Table profile_chat_relate {
+  id biginteger [primary key]
+  chat_id biginteger  
+  profile_id biginteger
+  createdAt datetame
+  updateAt datetame
+}
+
+Table message_chat_relate {
+  id biginteger [primary key]
+  chat_id biginteger
+  message_id biginteger
+  createdAt datetame
+  updateAt datetame
+}
+
+Table message {
+  id biginteger [primary key]
+  content varchar
+  profile_id biginteger
+  createdAt datetame
+  updateAt datetame
+}
+
+Table message_media_relate {
+  id biginteger [primary key]
+  message_id biginteger
+  file_id biginteger
+  createdAt datetame
+  updateAt datetame
+}
+
+Ref: feed.profile_id > profile.id
+Ref: profile_relate.profile_id > profile.id
+Ref: profile_relate.profile_sec_id > profile.id
+Ref: media_relate.profile_id > profile.id
+Ref: media_relate.photo_id > file.id
+Ref: chat.id > profile_chat_relate.chat_id
+Ref: profile_chat_relate.profile_id > profile.id
+Ref: file.id > chat.photo_id
+Ref: message_media_relate.message_id > message.id
+Ref: message_media_relate.file_id > file.id
+Ref: message_chat_relate.chat_id > chat.id
+Ref: message_chat_relate.message_id > message.id
+Ref: message.profile_id > profile.id
