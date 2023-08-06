@@ -29,17 +29,10 @@ Table chat {
   update_at datetame
 }
 
-Table message_chat_relate {
-  id biginteger [primary key]
-  chat_id biginteger
-  message_id biginteger
-  created_at datetame
-  update_at datetame
-}
-
 Table message {
   id biginteger [primary key]
   content varchar
+  chat_id biginteger
   profile_id biginteger
   created_at datetame
   update_at datetame
@@ -91,8 +84,7 @@ Ref: media_profile_relate.profile_id > profile.id
 Ref: chat.id > profile_chat_relate.chat_id
 Ref: profile_chat_relate.profile_id > profile.id
 Ref: message_media_relate.message_id > message.id
-Ref: message_chat_relate.chat_id > chat.id
-Ref: message_chat_relate.message_id > message.id
+Ref: message.chat_id > chat.id
 Ref: message.profile_id > profile.id
 
 //other db only for files 
@@ -115,4 +107,3 @@ created_at DATETIME) as Node
 */
 // enum type_relate { in_love, friend, husband, etc.. }
 // enum message_status { is_read, deleted, etc.. }
-
