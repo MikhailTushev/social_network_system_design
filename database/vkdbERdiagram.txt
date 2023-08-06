@@ -1,0 +1,109 @@
+//https://dbdiagram.io/d/64c636c202bd1c4a5eecf665
+
+Table profile {
+  id biginteger [primary key]
+  first_name varchar
+  last_name varchar
+  bith_date datetame
+  photo_id biginteger
+  cityType int // internal enum with all county
+  hobby text [note: 'Content of the hobby']
+  created_at datetame
+  update_at datetame
+}
+
+Table feed {
+  id biginteger [primary key]
+  profile_id biginteger 
+  body text [note: 'Content of the post']
+  photo_id biginteger
+  created_at datetame
+  update_at datetame
+}
+
+Table chat {
+  id biginteger [primary key]
+  photo_id biginteger  
+  type int
+  created_at datetame
+  update_at datetame
+}
+
+Table message {
+  id biginteger [primary key]
+  content varchar
+  chat_id biginteger
+  profile_id biginteger
+  created_at datetame
+  update_at datetame
+}
+
+Table message_status {
+  message_id biginteger
+  profile_id biginteger
+  status byte
+  created_at datetame
+}
+
+Table message_media_relate {
+  id biginteger [primary key]
+  message_id biginteger
+  file_id biginteger  // file.id
+  created_at datetame
+  update_at datetame
+}
+
+Table media_feed_relate {
+  id biginteger [primary key]
+  feed_id biginteger 
+  file_id biginteger // file.id
+  created_at datetame
+  update_at datetame
+}
+
+Table media_profile_relate {
+  id biginteger [primary key]
+  profile_id biginteger 
+  photo_id biginteger // file.id
+  created_at datetame
+  update_at datetame
+}
+
+Table profile_chat_relate {
+  id biginteger [primary key]
+  chat_id biginteger  
+  profile_id biginteger
+  created_at datetame
+  update_at datetame
+}
+
+Ref: feed.profile_id > profile.id
+Ref: media_feed_relate.feed_id > feed.id
+Ref: message_status.message_id > message.id
+Ref: media_profile_relate.profile_id > profile.id
+Ref: chat.id > profile_chat_relate.chat_id
+Ref: profile_chat_relate.profile_id > profile.id
+Ref: message_media_relate.message_id > message.id
+Ref: message.chat_id > chat.id
+Ref: message.profile_id > profile.id
+
+//other db only for files 
+Table file {
+  id biginteger [primary key]
+  body text [note: 'bytes content']
+  media_type int // doc, photo, txt... 
+  created_at datetame
+  update_at datetame
+}
+
+/*gpaphSql
+TABLE user_relate
+(
+id bigint not null
+target_profile_id int not null,
+from_profile_id int not null,
+type byte,
+created_at DATETIME) as Node
+*/
+// enum type_relate { in_love, friend, husband, etc.. }
+// enum message_status { is_read, deleted, etc.. }
